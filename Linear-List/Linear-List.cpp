@@ -1,7 +1,7 @@
 /*
  * ===================================================================
  *
- *       Filename:  Linear-List.c
+ *       Filename:  Linear-List.cpp
  *
  *        Remarks:  线性表的静态分配实现
  *
@@ -16,11 +16,9 @@
 using namespace std;
 
 #define MAXSIZE 50
-#define INITSIZE 100
-#define ElemType int 
+typedef int ElemType;
 
-// 静态分配
-typedef struct
+typedef struct 
 {
 	ElemType data[MAXSIZE];
 	int length;
@@ -32,13 +30,23 @@ int Length(SqList L)
 	return L.length;
 }
 
-// 初始化表
-bool InitList(SqList &L)
+// 按值查找,返回元素e的位置
+// 若查找失败则返回0
+int LocateElem(SqList L,ElemType e)
 {
-	for(int i = 0;i < MAXSIZE;i++)
-		L.data[i] = 0;
-	L.length = 0;
-	return true;
+	for(int i = 0;i < L.length;i++)
+		if(L.data[i] == e)
+			return i+1;
+	return 0;
+}
+
+// 按位查找,返回第i个元素的位置
+// 若查找失败则返回-1
+int GetElem(SqList L,int i)
+{
+	if(i < 1 || i > L.length)
+		return -1;
+	return L.data[i-1];
 }
 
 // 插入操作
@@ -81,30 +89,10 @@ void PrintList(SqList L)
 	}
 }
 
-int main()
+// 判空操作
+bool Empty(SqList L)
 {
-    // ios
-    #ifdef ONLINE_JUDGE
-    #else
-        freopen("in.txt","r",stdin);
-        // freopen("out.txt","w:",stdout);
-    #endif
-	SqList L;
-	InitList(L);
-	printf("%d\n",Length(L));
-	
-	ListInsert(L,1,1);
-	ListInsert(L,2,2);
-	printf("%d\n",Length(L));
-	
-	int e;
-	ListDelete(L,1,e);
-	printf("%d\n",Length(L));
-	PrintList(L);
-    
-    fclose(stdin);
-    // fclose(stdout);
-    return 0;
+	if(L.length == 0)	
+		return true;
+	return false;
 }
-
-
