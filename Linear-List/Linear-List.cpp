@@ -24,6 +24,13 @@ typedef struct
 	int length;
 }SqList;
 
+// 初始化线性表
+bool InitList(SqList &L)
+{
+	L.length = 0;
+	return true;
+}
+
 // 求表长，返回线性表的长度
 int Length(SqList L)
 {
