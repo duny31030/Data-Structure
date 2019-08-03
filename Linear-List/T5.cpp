@@ -32,7 +32,7 @@ bool Empty(SqList L)
 	return false;
 }
 
-// 有序顺序表中删除值在s与t之间的所有元素(s<t)(包含s和t)
+// 顺序表(未必有序)中删除值在s与t之间的所有元素(s<t)(包含s和t)
 // 如果s和t不合理或者顺序表为空,则显示出错信息并退出运行
 // 时 O(N)
 // 空 O(1)
@@ -48,11 +48,17 @@ bool Delete(SqList &L,int s,int t)
 		printf("s和t不合理!\n");
 		return false;
 	}
-	int i,j,k;
-	for(i = 0;L.data[i] < s && i < L.length;i++);
-	for(j = i,k = 0;L.data[j] <= t && j < L.length;j++,k++);
-	for(;j < L.length;j++)
-		L.data[j-k] = L.data[j];
+	int i,j = 0;
+	for(i = 0;i < L.length;i++)
+	{
+		if(L.data[i] > t || L.data[i] < s)
+		{
+			L.data[i-j] = L.data[i];
+		}
+		else 
+			j++;
+	}
+	L.length -= j;
 	return true;
 }
 
