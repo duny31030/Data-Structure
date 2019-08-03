@@ -43,14 +43,14 @@ bool Delete(SqList &L,int s,int t)
 		printf("顺序表为空!\n");
 		return false;
 	}
-	if(s > t)
+	if(s >= t)
 	{
 		printf("s和t不合理!\n");
 		return false;
 	}
 	int i,j,k;
-	for(i = 0;L.data[i] < s && i < L.length;i++);
-	for(j = i,k = 0;L.data[j] <= t && j < L.length;j++,k++);
+	for(i = 0;L.data[i] <= s && i < L.length;i++);
+	for(j = i,k = 0;L.data[j] < t && j < L.length;j++,k++);
 	for(;j < L.length;j++)
 		L.data[j-k] = L.data[j];
 	return true;
