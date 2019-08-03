@@ -53,6 +53,7 @@ bool Delete(SqList &L,int s,int t)
 	for(j = i,k = 0;L.data[j] < t && j < L.length;j++,k++);
 	for(;j < L.length;j++)
 		L.data[j-k] = L.data[j];
+	L.length -= k;
 	return true;
 }
 
