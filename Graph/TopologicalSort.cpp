@@ -24,7 +24,7 @@ int print[MAXVEX];
 typedef struct EdgeNode
 {
 	int adjvex;				// 邻接点域,存储该顶点对应的下标
-	// int weight;				// 用于存储权值,对于非网图可以不需要
+	int weight;				// 用于存储权值,对于非网图可以不需要
 	struct EdgeNode *next;	// 链域,指向下一个邻接点
 }EdgeNode;
 
@@ -70,7 +70,6 @@ bool TopologicalSort(AlGraph G,int n)
 	InitStack_1(S);
 	for(i = 1;i <= n;i++)
 	{
-		printf("--%d-- -- %d-- \n",i,G.adjList[i].in);
 		if(G.adjList[i].in == 0)
 			Push_1(S,i);
 	}
@@ -109,12 +108,10 @@ int main()
     InitGraph(G);
 	int n,m,i,u,v;
 	scanf("%d %d",&n,&m);
-	printf("%d %d\n",n,m);
 	G.numVertexes = n;	G.numEdges = m;
 	for(i = 1;i <= m;i++)
 	{
 		scanf("%d %d",&u,&v);
-		printf("%d %d\n",u,v);
 		AddEdges(G,u,v);
 	}
 	if(TopologicalSort(G,n))
